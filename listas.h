@@ -12,3 +12,6 @@ struct list{
     Nodo* Primeiro;
     Nodo* Ultimo;
 }typedef List;
+
+List* CriaLista();
+void CriaNodo(List* lista,char nome[15],char genero,char tipo[7],char estado[10],unsigned int idade);
