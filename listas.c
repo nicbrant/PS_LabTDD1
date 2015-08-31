@@ -4,82 +4,83 @@
 #include<stdio.h>
 #include<string.h>
 
-struct nodo{
-    struct nodo* prox;
-    struct nodo* ante;
-    char nome[15];
-    char genero;
-    char tipo[7];
-    char estado[10];
-    unsigned int idade;
-}typedef Nodo;
+struct Node
+{
+    struct Node* next;
+    struct Node* prev;
+    char name[15];
+    unsigned short int idade;
+    char gender; /* 0 if male, 1 if female */
+    char type; /* 0 if dwarf, 1 if mage */
+    unsigned short int humor; /* pessimo, ruim, moderado, bom, satisfeito, feliz */
+};
+typedef struct Node Node;
 
-struct list{
-    Nodo* Atual;
-    Nodo* Primeiro;
-    Nodo* Ultimo;
-}typedef List;
+struct List
+{
+	Node* init; /* First element */
+	unsigned int n; /* Count */
+};
+typedef struct List List;
 
 List* CriaLista(){
     List* nova = (List*)malloc(sizeof(List));
     if(nova==NULL)
         end(2);
+    nova->init = NULL;
+    nova->n = 0;
     return nova;
 }
 
-void CriaNodo(List* lista,char nome[15],char genero,char tipo[7],char estado[10],unsigned int idade){
-    Nodo* novo = (Nodo*)malloc(sizeof(Nodo));
+void CriaNodo(List* lista,char nome[15],char genero,char tipo,unsigned short int estado,unsigned short int idade){
+    Node* novo = (Node*)malloc(sizeof(Node));
     if(novo==NULL){
         DesalocaLista(lista);
         end(3);
     }
-    if(lista->Primeiro==NULL){
-        lista->Primeiro = novo;
-        lista->Ultimo = novo;
-        novo->prox = novo;
-        novo->ante = novo;
+    if(lista->init==NULL){
+        lista->init = novo;
+        novo->next = novo;
+        novo->prev = novo;
     }else{
-        Nodo* exultimo = lista->Ultimo;
-        exultimo->prox = novo;
-        novo->ante = exultimo;
-        novo->prox = lista->Primeiro;
-        lista->Ultimo = novo;
-        lista->Primeiro->ante = novo;
+        Node* exultimo = lista->init->prev;
+        exultimo->next = novo;
+        novo->prev = exultimo;
+        novo->next = lista->init;
+        lista->init->prev = novo;
     }
-    strcpy(novo->nome,nome);
-    novo->genero = genero;
-    strcpy(novo->tipo,tipo);
-    strcpy(novo->estado,estado);
+    strcpy(novo->name,nome);
+    novo->gender = genero;
+    novo->type = tipo;
+    novo->humor = estado;
     novo->idade = idade;
+    lista->n++;
 }
 
-void DesalocaNodo(Nodo* atual){
+void DesalocaNodo(Node* atual){
     if(atual){
-        if(atual->prox == atual){
-            atual->prox = NULL;
-            atual->ante = NULL;
-        }else{
-            atual->prox->ante = atual->ante;
-            atual->ante->prox = atual->prox;
-        }
+        atual->next->prev = atual->prev;
+        atual->prev->next = atual->next;
         free(atual);
     }
 }
 
 void DesalocaLista(List* atual){
     if(atual){
-        Nodo* q = atual->Ultimo;
-        while(q){
-            atual->Ultimo = q->ante;
+        Node* q = atual->init->prev;
+        Node* t = q->prev;
+        while(q != t){
+            t = q->prev;
             DesalocaNodo(q);
-            q = atual->Ultimo;
+            q = t;
         }
+        DesalocaNodo(q);
         free(atual);
     }
 }
 
 int ListaVazia(List* atual){
-    if(atual->Ultimo){
+    if(atual->n)
         return 1;
     return 0;
 }

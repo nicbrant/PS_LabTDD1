@@ -3,7 +3,8 @@
  * Rafael Martins - 14/0159461 <rafaelmartinsrm@gmail.com>
  * Nicholas Brant - 14/0157158
 */
-
+#include<stdio.h>
+#include<string.h>
 struct Node
 {
     struct Node* next;
@@ -23,8 +24,8 @@ struct List
 };
 typedef struct List List;
 
-List* CriaLista();
-void CriaNodo(List* lista,char nome[15],char genero,char tipo[7],char estado[10],unsigned int idade);
-void DesalocaNodo(Nodo* atual);
+List* CriaLista()
+void CriaNodo(List* lista,char nome[15],char genero,char tipo,unsigned short int estado,unsigned short int idade);
+void DesalocaNodo(Node* atual);
 void DesalocaLista(List* atual);
 int ListaVazia(List* atual);
