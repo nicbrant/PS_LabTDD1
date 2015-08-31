@@ -25,3 +25,6 @@ typedef struct List List;
 
 List* CriaLista();
 void CriaNodo(List* lista,char nome[15],char genero,char tipo[7],char estado[10],unsigned int idade);
+void DesalocaNodo(Nodo* atual);
+void DesalocaLista(List* atual);
+int ListaVazia(List* atual);

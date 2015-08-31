@@ -30,7 +30,7 @@ List* CriaLista(){
 void CriaNodo(List* lista,char nome[15],char genero,char tipo[7],char estado[10],unsigned int idade){
     Nodo* novo = (Nodo*)malloc(sizeof(Nodo));
     if(novo==NULL){
-        //desaloca os nodos e a lista
+        DesalocaLista(lista);
         end(3);
     }
     if(lista->Primeiro==NULL){
