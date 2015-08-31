@@ -52,3 +52,34 @@ void CriaNodo(List* lista,char nome[15],char genero,char tipo[7],char estado[10]
     strcpy(novo->estado,estado);
     novo->idade = idade;
 }
+
+void DesalocaNodo(Nodo* atual){
+    if(atual){
+        if(atual->prox == atual){
+            atual->prox = NULL;
+            atual->ante = NULL;
+        }else{
+            atual->prox->ante = atual->ante;
+            atual->ante->prox = atual->prox;
+        }
+        free(atual);
+    }
+}
+
+void DesalocaLista(List* atual){
+    if(atual){
+        Nodo* q = atual->Ultimo;
+        while(q){
+            atual->Ultimo = q->ante;
+            DesalocaNodo(q);
+            q = atual->Ultimo;
+        }
+        free(atual);
+    }
+}
+
+int ListaVazia(List* atual){
+    if(atual->Ultimo){
+        return 1;
+    return 0;
+}
