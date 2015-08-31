@@ -71,9 +71,11 @@ void DesalocaLista(List* atual){
         Node* t = q->prev;
         while(q != t){
             t = q->prev;
+            atual->n--;
             DesalocaNodo(q);
             q = t;
         }
+        atual->n--;
         DesalocaNodo(q);
         free(atual);
     }

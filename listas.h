@@ -24,7 +24,7 @@ struct List
 };
 typedef struct List List;
 
-List* CriaLista()
+List* CriaLista();
 void CriaNodo(List* lista,char nome[15],char genero,char tipo,unsigned short int estado,unsigned short int idade);
 void DesalocaNodo(Node* atual);
 void DesalocaLista(List* atual);
