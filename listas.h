@@ -3,8 +3,6 @@
  * Rafael Martins - 14/0159461 <rafaelmartinsrm@gmail.com>
  * Nicholas Brant - 14/0157158
 */
-#include<stdio.h>
-#include<string.h>
 struct Node
 {
     struct Node* next;
