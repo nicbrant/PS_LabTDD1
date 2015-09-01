@@ -51,16 +51,19 @@ void DesalocaNodo(Node* atual){
 
 void DesalocaLista(List* atual){
     if(atual){
-        Node* q = atual->init->prev;
-        Node* t = q->prev;
-        while(q != t){
-            t = q->prev;
-            atual->n--;
-            DesalocaNodo(q);
-            q = t;
-        }
-        atual->n--;
-        DesalocaNodo(q);
+	if(atual->init){
+		Node* q = atual->init->prev;
+		Node* t = q->prev;
+		printf("teste");
+		while(q != t){
+		    t = q->prev;
+		    atual->n--;
+		    DesalocaNodo(q);
+		    q = t;
+		}
+		atual->n--;
+		DesalocaNodo(q);
+	}
         free(atual);
     }
 }
