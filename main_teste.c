@@ -5,7 +5,7 @@
 
 #include "CUnit/CUnit.h"
 #include "CUnit/Basic.h" 
-#include "main.c"
+#include "listas.h"
 /*
  * Abaixo funções que fazem o teste.
  */
@@ -13,18 +13,18 @@ void adicionar_testes_main(void); // Cria a suite
 
 
 /* Teste numero numero par */
-void teste_DT_VerificaParidade_Par(void){
+void teste_verificasecriou(void){
 	int resultado;
-	resultado = VerificaParidade(2);
+	// resultado = CriaNodo(List* lista,char nome[15],char genero,char tipo,unsigned short int estado,unsigned short int idade);
 	CU_ASSERT_TRUE( !resultado );
 }
 
 void  adicionar_testes_main(void){
 	CU_pSuite suite;
 	
-	/*Cria uma suite que conterÃ¡ todos os testes*/
+	/*Cria uma suite que conterá todos os testes*/
 	suite = CU_add_suite("Testes da main",NULL,NULL);
-	
+	CU_ADD_TEST(suite, teste_verificasecriou);
 }
 int main(void){
 	/*Inicializa o registro de suÃ­tes e testes do CUnit*/	
