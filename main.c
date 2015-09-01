@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "listas.h"
 
 void PegaDadosArquivo(List* atual){
@@ -8,7 +9,8 @@ void PegaDadosArquivo(List* atual){
     if(arquivo == NULL)
         return;
     while(fscanf(arquivo,"%s",palavra)!= EOF){
-            fscanf(arquivo,"%s %i %c %c %i",palavra,&idade,&genero,&tipo,&humor);
+			fseek(arquivo, -strlen(palavra), SEEK_CUR);
+            fscanf(arquivo,"%s %d %c %c %d",palavra,&idade,&genero,&tipo,&humor);
             CriaNodo(atual,palavra,genero,tipo,humor,idade);
     }
     fclose(arquivo);
@@ -32,6 +34,7 @@ int main(){
             mesa->n--;
         }else{
             atual->humor++;
+			printf("Voce alimentou %s para humor %d.\n", atual->name, atual->humor);
             atual = atual->next;
         }
     }
